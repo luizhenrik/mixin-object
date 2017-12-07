@@ -1,0 +1,8 @@
+$colors: (
+    black: #000,
+    white: #FFF,
+    red: #ff0000,
+    yellow: #fbff00
+);
+
+@include object-set(colors, $colors);

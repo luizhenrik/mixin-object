@@ -1,0 +1,5 @@
+p{
+    color: object-get(colors, yellow);
+    border: 2px solid object-get(colors, black);
+    background-color: object-get(colors, white); 
+}

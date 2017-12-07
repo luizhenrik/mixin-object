@@ -1,4 +1,4 @@
-@function str-remove-whitespace($str) {
+@function remove_whiteSpace($str) {
     @while (str-index($str, ' ') != null) {
         $index: str-index($str, ' ');
         $str: "#{str-slice($str, 0, $index - 1)}#{str-slice($str, $index + 1)}";

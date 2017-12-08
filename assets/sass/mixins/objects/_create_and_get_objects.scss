@@ -1,33 +1,28 @@
-// Variavel virtual para criação dos objetos
 $objectGlobal: ();
 
-// Está função é para criar Objects
-// Exemplo para criar um objeto direto: 
-// @include object-set(key, varObject);
 @mixin object-set($key, $varObject) {
     $props: ();
     @each $name, $value in $varObject {
-        $props: map-merge($props, ( str-remove-whitespace(to-string($name)): $value));
+        $name: remove_whiteSpace(to-string($name));
+        $props: map-merge($props, ($name: $value));
     }
-    $objectGlobal: map-merge($objectGlobal, ( $key: $props)) !global;
+    $objectGlobal: map-merge($objectGlobal, ($key: $props)) !global;
 }
 
-// Está função serve para colocar os valores de items em propriedades do css
-// exemplo:
-// .element{color: object-get(nomeDoObjeto, objetoItemNome);}
-// depois de compilado
-// .element{color: objetoItemValor;}
 @function object-get($object, $key) {
-    //@warn $object;
+    
+    $key: remove_whiteSpace(to-string($key));
+
     @if (map-has-key($objectGlobal, $object)) {
-        //@warn map-keys($props);
         $props: map-get($objectGlobal, $object);
-        @if (map-has-key($props, str-remove-whitespace(to-string($key)))) {
-            @return map-get($props, str-remove-whitespace(to-string($key)));
+        @warn $key;
+        @if (map-has-key($props, $key)) {
+            @return map-get($props, $key);
         }
         @else{
             @debug "A Key: #{$key} no Objeto: #{$object} não foi encontrado";
         }
+        
     }
     @else {
         @debug "Objeto: #{$object} não foi encontrado";
